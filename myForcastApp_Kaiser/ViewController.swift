@@ -40,15 +40,32 @@ struct DataForDay{
 import UIKit
 
 class ViewController: UIViewController {
+    // labels
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var feels_likeLabel: UILabel!
+    @IBOutlet weak var temp_maxLabel: UILabel!
+    @IBOutlet weak var temp_minLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    
+    
+    //
     
     var fiveDaysData: [DataForDay] = []
+    var index = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         fiveDay()
-        print("here")
-        
+        sleep(1)
+        dateLabel.text = "Date: \(fiveDaysData[index].dayDate)"
+        tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))"
+        feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))"
+        temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))"
+        temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))"
+        humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))"
+       
     }
     
     func fiveDay(){
@@ -85,17 +102,41 @@ class ViewController: UIViewController {
         let responce = try! JSONDecoder().decode(WeatherData.self, from: JSONdata)
             
         for i in responce.list{
-            var tempDate = i.dt_txt
-            var tempTemp = i.main.temp
-            var tempFeels_Like = i.main.feels_like
-            var tempDay_max = i.main.temp_max
-            var tempDay_min = i.main.temp_min
-            var tempHumidity = i.main.humidity
+            let tempDate = i.dt_txt
+            let tempTemp = i.main.temp
+            let tempFeels_Like = i.main.feels_like
+            let tempDay_max = i.main.temp_max
+            let tempDay_min = i.main.temp_min
+            let tempHumidity = i.main.humidity
             fiveDaysData.append(DataForDay(dayDate: tempDate, dayTemp: tempTemp, dayFeels_like: tempFeels_Like, dayTemp_max: tempDay_max, dayTemp_min: tempDay_min, dayHumidity: tempHumidity))
         }
         print(fiveDaysData)
     }
-
-
+    
+    @IBAction func forwardAction(_ sender: Any) {
+        if index <= 39 {
+            index+=1
+            dateLabel.text = "Date: \(fiveDaysData[index].dayDate)"
+            tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))"
+            feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))"
+            temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))"
+            temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))"
+            humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))"
+        }
+        
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
+        if index >= 1 {
+            index-=1
+            dateLabel.text = "Date: \(fiveDaysData[index].dayDate)"
+            tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))"
+            feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))"
+            temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))"
+            temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))"
+            humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))"
+        }
+    }
+    
 }
 
