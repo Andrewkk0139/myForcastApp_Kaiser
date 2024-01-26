@@ -18,9 +18,14 @@ struct Main: Decodable {
     var temp_min: Float
     var humidity: Float
 }
+//struct Weather: Decodable{
+//    var description: String
+//}
+
 // this gets everything in list
 struct List: Decodable{
     var main: Main
+   // var weather: Weather
     var dt_txt: String
 }
 
@@ -31,6 +36,7 @@ struct DataForDay{
     var dayTemp_max: Float
     var dayTemp_min: Float
     var dayHumidity: Float
+   // var dayDescription: String
 }
 
 
@@ -48,6 +54,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var temp_minLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     
+    @IBOutlet weak var ImageOutlet: UIImageView!
     
     //
     
@@ -60,11 +67,12 @@ class ViewController: UIViewController {
         fiveDay()
         sleep(1)
         dateLabel.text = "Date: \(fiveDaysData[index].dayDate)"
-        tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))"
-        feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))"
-        temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))"
-        temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))"
-        humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))"
+        tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))F°"
+        feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))F°"
+        temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))F°"
+        temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))F°"
+        humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))%"
+       // ImageOutlet.image = UIImage(systemName: (whatSym(fiveDaysData[index].dayDescription)))
        
     }
     
@@ -108,6 +116,7 @@ class ViewController: UIViewController {
             let tempDay_max = i.main.temp_max
             let tempDay_min = i.main.temp_min
             let tempHumidity = i.main.humidity
+           // let tempDesc = i.weather.description
             fiveDaysData.append(DataForDay(dayDate: tempDate, dayTemp: tempTemp, dayFeels_like: tempFeels_Like, dayTemp_max: tempDay_max, dayTemp_min: tempDay_min, dayHumidity: tempHumidity))
         }
         print(fiveDaysData)
@@ -117,11 +126,12 @@ class ViewController: UIViewController {
         if index <= 39 {
             index+=1
             dateLabel.text = "Date: \(fiveDaysData[index].dayDate)"
-            tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))"
-            feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))"
-            temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))"
-            temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))"
-            humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))"
+            tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))F°"
+            feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))F°"
+            temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))F°"
+            temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))F°"
+            humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))%"
+           // ImageOutlet.image = UIImage(systemName: (whatSym(fiveDaysData[index].dayDescription)))
         }
         
     }
@@ -130,11 +140,26 @@ class ViewController: UIViewController {
         if index >= 1 {
             index-=1
             dateLabel.text = "Date: \(fiveDaysData[index].dayDate)"
-            tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))"
-            feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))"
-            temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))"
-            temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))"
-            humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))"
+            tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))F°"
+            feels_likeLabel.text = "Feels Like: \(String(fiveDaysData[index].dayFeels_like))F°"
+            temp_maxLabel.text = "Max Temp: \(String(fiveDaysData[index].dayTemp_max))F°"
+            temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))F°"
+            humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))%"
+           // ImageOutlet.image = UIImage(systemName: (whatSym(fiveDaysData[index].dayDescription)))
+        }
+    }
+    func whatSym(_ s1: String) -> String{
+        switch s1 {
+        case "overcast clouds":
+            return "cloud"
+        case "light rain":
+            return "cloud.drizzle"
+        case "broken clouds":
+            return "smoke"
+        case "light snow":
+            return "cloud.snow"
+        default:
+            return "sun.max.fill"
         }
     }
     
