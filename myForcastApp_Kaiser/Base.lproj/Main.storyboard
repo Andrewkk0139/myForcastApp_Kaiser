@@ -91,12 +91,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zL-eY-ZiC">
-                                <rect key="frame" x="35" y="186" width="323" height="65"/>
+                                <rect key="frame" x="35" y="190" width="323" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Kd-FL-PRe">
+                                <rect key="frame" x="0.0" y="114" width="229" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5H-3r-P0b">
+                                <rect key="frame" x="261" y="128" width="78" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Submit"/>
+                                <connections>
+                                    <action selector="submitAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zw1-bu-2j2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.66180274008641204" green="0.99959772407474101" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -106,6 +119,7 @@
                         <outlet property="dateLabel" destination="1zL-eY-ZiC" id="tgf-zG-2hc"/>
                         <outlet property="feels_likeLabel" destination="gYh-bc-GVP" id="sbU-iv-Opy"/>
                         <outlet property="humidityLabel" destination="CgZ-I5-fk2" id="WLF-pL-VPA"/>
+                        <outlet property="pickerOutlet" destination="2Kd-FL-PRe" id="tXc-27-xgY"/>
                         <outlet property="tempLabel" destination="s6q-rg-2CU" id="9Qa-lT-5oV"/>
                         <outlet property="temp_maxLabel" destination="LY1-Nw-hI7" id="BPb-kT-PJ9"/>
                         <outlet property="temp_minLabel" destination="onZ-yf-DWL" id="xHx-mh-eS3"/>
