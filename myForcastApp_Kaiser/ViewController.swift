@@ -64,8 +64,8 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     var fiveDaysData: [DataForDay] = []
     var index = 0
     // New York City, Chicago, Los Angeles, San Fransisco, Miami
-    var majorCities:[String:String] = ["40.71":"-74.00","41.87":"87.62","34.05":"-118.24","37.77":"-122.41","25.76":"-80.19"]
-    var majorCitiesNames = ["New York City","Chicago","Los Angeles","San Fransisco","Miami"]
+    var majorCities: [String:String] = ["40.71":"-74.00","41.87":"-87.62","34.05":"-118.24","37.77":"-122.41","25.76":"-80.19"]
+    var majorCitiesNames = ["Miami","Los Angeles","San Fransisco","New York City","Chicago"]
     var majorCityIndex = 0
     
     override func viewDidLoad() {
@@ -192,15 +192,19 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             majorCityIndex = row
+            print(majorCityIndex)
         }
     }
     
     @IBAction func submitAction(_ sender: Any) {
         fiveDaysData.removeAll()
-        let lat = Array(majorCities.keys)[majorCityIndex]
-        let long = Array(majorCities.values)[majorCityIndex]
         
-        fiveDay(key: lat, value: long)
+        print("the index is \(majorCityIndex)")
+        // downcasting the dict to an array, which makes it an array full of tuples. Sorting it allows it to be a standard order each time. Doing normal Array(dict.keys) puts it in random orders which doesn't match with the selected city.
+        let sortedArray = Array(majorCities).sorted { $0.key < $1.key }
+        print(sortedArray)
+       
+        fiveDay(key: sortedArray[majorCityIndex].key, value: sortedArray[majorCityIndex].value)
         sleep(1)
         dateLabel.text = "Date: \(fiveDaysData[index].dayDate)"
         tempLabel.text = "Temp: \(String(fiveDaysData[index].dayTemp))F°"
@@ -209,6 +213,8 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         temp_minLabel.text = "Min Temp: \(String(fiveDaysData[index].dayTemp_min))F°"
         humidityLabel.text = "Humidity: \(String(fiveDaysData[index].dayHumidity))%"
     }
+    
+    
     
 }
 
